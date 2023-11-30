@@ -27,6 +27,9 @@ spec:
       chart: capsule-proxy
       sourceRef:
         kind: HelmRepository
-        name: clastix
+        name: projectcapsule
       interval: 1m
+  values:
+    image:
+      tag: v0.4.6
 

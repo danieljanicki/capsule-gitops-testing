@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: main
+    branch: addon
   secretRef:
     name: flux-system
   url: https://github.com/maxgio92/capsule-gitops-testing.git

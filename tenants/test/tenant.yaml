@@ -26,6 +26,7 @@ metadata:
   namespace: test-home
   annotations:
     capsule.addon.fluxcd/enabled: "true"
+    capsule.addon.fluxcd/kubeconfig-global: "true"
 ---
 apiVersion: capsule.clastix.io/v1beta2
 kind: CapsuleConfiguration

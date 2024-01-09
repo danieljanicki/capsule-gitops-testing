@@ -1,0 +1,30 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: maxgio92
+  namespace: flux-system
+spec:
+  type: "oci"
+  interval: 5m0s
+  url: oci://ghcr.io/maxgio92/charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: capsule-addon-fluxcd
+  namespace: flux-system
+spec:
+  targetNamespace: capsule-system
+  serviceAccountName: helm-controller
+  install:
+    createNamespace: true
+  releaseName: capsule-addon-fluxcd
+  interval: 5m
+  chart:
+    spec:
+      chart: capsule-addon-fluxcd
+      sourceRef:
+        kind: HelmRepository
+        name: maxgio92
+      interval: 1m

@@ -63,3 +63,14 @@ spec:
         subjects:
         - kind: ServiceAccount
           name: gitops-reconciler
+---
+apiVersion: capsule.clastix.io/v1beta2
+kind: CapsuleConfiguration
+metadata:
+  name: default
+spec:
+  enableTLSReconciler: true
+  forceTenantPrefix: true
+  userGroups:
+  - capsule.clastix.io
+  - system:serviceaccounts:new-home

@@ -20,3 +20,9 @@ metadata:
   labels:
     capsule.clastix.io/tenant: new
   name: new-home
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitops-reconciler
+  namespace: new-home

@@ -73,4 +73,5 @@ spec:
   forceTenantPrefix: true
   userGroups:
   - capsule.clastix.io
+  - system:serviceaccounts:test-home
   - system:serviceaccounts:new-home

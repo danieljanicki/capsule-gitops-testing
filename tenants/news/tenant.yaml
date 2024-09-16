@@ -35,3 +35,31 @@ metadata:
     kubernetes.io/service-account.name: gitops-reconciler
   name: gitops-reconciler
   namespace: new-home
+---
+apiVersion: capsule.clastix.io/v1beta2
+kind: TenantResource
+metadata:
+  name: gitops-reconciler
+  namespace: new-home
+spec:
+  resyncPeriod: 5m
+  resources:
+    - namespaceSelector:
+        matchLabels:
+          capsule.clastix.io/tenant: new
+      rawItems:
+      - apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: gitops-reconciler
+      - apiVersion: rbac.authorization.k8s.io/v1
+        kind: RoleBinding
+        metadata:
+          name: gitops-reconciler
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: cluster-admin
+        subjects:
+        - kind: ServiceAccount
+          name: gitops-reconciler

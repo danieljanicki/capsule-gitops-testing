@@ -26,3 +26,12 @@ kind: ServiceAccount
 metadata:
   name: gitops-reconciler
   namespace: new-home
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: gitops-reconciler
+  name: gitops-reconciler
+  namespace: new-home

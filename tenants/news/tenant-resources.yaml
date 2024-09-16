@@ -18,7 +18,7 @@ metadata:
 spec:
   kubeConfig:
     secretRef:
-      name: gitops-reconciler-kubeconfig
+      name: gitops-reconciler-kubeconfig-new
       key: kubeconfig
   interval: 1m
   path: ./clusters/new

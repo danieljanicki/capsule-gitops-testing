@@ -102,17 +102,17 @@ rules:
   resources: ["users"]
   verbs: ["impersonate"]
   resourceNames: ["system:serviceaccount:new-home:gitops-reconciler"]
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: test-gitops-reconciler-impersonate
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: test-gitops-reconciler-impersonator
-#subjects:
-#- name: gitops-reconciler
-#  kind: ServiceAccount
-#  namespace: new-home
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: new-gitops-reconciler-impersonate
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: new-gitops-reconciler-impersonator
+subjects:
+- name: gitops-reconciler
+  kind: ServiceAccount
+  namespace: new-home
 

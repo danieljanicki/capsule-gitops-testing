@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: https://github.com/maxgio92/capsule-gitops-testing.git
+  url: ssh://git@github.com/danieljanicki/capsule-gitops-testing.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

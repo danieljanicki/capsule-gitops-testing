@@ -6,7 +6,7 @@ metadata:
   namespace: test-home
 spec:
   interval: 1m
-  url: https://github.com/ppodevlabs/capsule-flux-test.git
+  url: https://github.com/danieljanicki/capsule-flux-test.git
   ref:
     branch: main
 ---

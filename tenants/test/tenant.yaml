@@ -70,7 +70,7 @@ metadata:
   name: default
 spec:
   enableTLSReconciler: true
-  forceTenantPrefix: true
+  forceTenantPrefix: false
   userGroups:
   - capsule.clastix.io
   - system:serviceaccounts:test-home

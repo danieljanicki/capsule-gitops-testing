@@ -63,55 +63,55 @@ spec:
         subjects:
         - kind: ServiceAccount
           name: gitops-reconciler
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: RoleBinding
-#metadata:
-#  labels:
-#    toolkit.fluxcd.io/tenant: test
-#  name: gitops-reconciler
-#  namespace: test-home
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: cluster-admin
-#subjects:
-#- kind: ServiceAccount
-#  name: gitops-reconciler
-#  namespace: test-home
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: capsule-namespace-provisioner-gitops-test
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: capsule-namespace-provisioner-gitops
-#subjects:
-#- apiGroup: rbac.authorization.k8s.io
-#  kind: Group
-#  name: system:serviceaccounts:test
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRole
-#metadata:
-#  name: test-gitops-reconciler-impersonator
-#rules:
-#- apiGroups: [""]
-#  resources: ["users"]
-#  verbs: ["impersonate"]
-#  resourceNames: ["system:serviceaccount:test-home:gitops-reconciler"]
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: test-gitops-reconciler-impersonate
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: test-gitops-reconciler-impersonator
-#subjects:
-#- name: gitops-reconciler
-#  kind: ServiceAccount
-#  namespace: test-home
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    toolkit.fluxcd.io/tenant: daniel
+  name: gitops-reconciler
+  namespace: daniel-home
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: gitops-reconciler
+  namespace: daniel-home
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: capsule-namespace-provisioner-gitops-daniel
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: capsule-namespace-provisioner-gitops
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts:daniel
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: daniel-gitops-reconciler-impersonator
+rules:
+- apiGroups: [""]
+  resources: ["users"]
+  verbs: ["impersonate"]
+  resourceNames: ["system:serviceaccount:daniel-home:gitops-reconciler"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: daniel-gitops-reconciler-impersonate
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: daniel-gitops-reconciler-impersonator
+subjects:
+- name: gitops-reconciler
+  kind: ServiceAccount
+  namespace: daniel-home

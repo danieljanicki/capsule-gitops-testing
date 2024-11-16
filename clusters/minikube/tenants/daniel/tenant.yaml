@@ -20,12 +20,12 @@ metadata:
   labels:
     capsule.clastix.io/tenant: daniel
   name: daniel-home
-#---
-#apiVersion: v1
-#kind: ServiceAccount
-#metadata:
-#  name: gitops-reconciler
-#  namespace: test-home
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitops-reconciler
+  namespace: daniel-home
 #---
 #apiVersion: v1
 #kind: Secret

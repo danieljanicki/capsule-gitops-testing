@@ -13,13 +13,13 @@ spec:
   owners:
   - name: system:serviceaccount:daniel-home:gitops-reconciler
     kind: ServiceAccount
-#---
-#apiVersion: v1
-#kind: Namespace
-#metadata:
-#  labels:
-#    capsule.clastix.io/tenant: test
-#  name: test-home
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    capsule.clastix.io/tenant: daniel
+  name: daniel-home
 #---
 #apiVersion: v1
 #kind: ServiceAccount

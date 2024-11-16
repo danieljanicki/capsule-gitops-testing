@@ -9,3 +9,14 @@ spec:
   userGroups:
   - capsule.clastix.io
   - system:serviceaccounts:daniel-home
+---
+apiVersion: capsule.clastix.io/v1beta2
+kind: CapsuleConfiguration
+metadata:
+  name: apps-home
+spec:
+  enableTLSReconciler: true
+  forceTenantPrefix: false
+  userGroups:
+  - capsule.clastix.io
+  - system:serviceaccounts:apps-home

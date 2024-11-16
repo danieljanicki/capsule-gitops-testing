@@ -15,3 +15,20 @@ spec:
   wait: true
   timeout: 5m
 ---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tenants
+  namespace: flux-system
+spec:
+  serviceAccountName: kustomize-controller
+  dependsOn:
+  - name: capsule
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./clusters/minikube/tenants
+  prune: true
+  wait: true
+  timeout: 5m

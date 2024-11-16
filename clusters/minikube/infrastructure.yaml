@@ -10,7 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./cluster/minikube/capsule
+  path: ./clusters/minikube/capsule
   prune: true
   wait: true
   timeout: 5m

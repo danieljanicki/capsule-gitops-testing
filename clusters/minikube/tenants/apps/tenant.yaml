@@ -1,0 +1,117 @@
+---
+apiVersion: capsule.clastix.io/v1beta2
+kind: Tenant
+metadata:
+  name: apps
+spec:
+  additionalRoleBindings:
+  - clusterRoleName: cluster-admin
+    subjects:
+    - name: gitops-reconciler
+      kind: ServiceAccount
+      namespace: apps-home
+  owners:
+  - name: system:serviceaccount:apps-home:gitops-reconciler
+    kind: ServiceAccount
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    capsule.clastix.io/tenant: apps
+  name: apps-home
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitops-reconciler
+  namespace: apps-home
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: gitops-reconciler
+  name: gitops-reconciler
+  namespace: apps-home
+---
+apiVersion: capsule.clastix.io/v1beta2
+kind: TenantResource
+metadata:
+  name: gitops-reconciler
+  namespace: apps-home
+spec:
+  resyncPeriod: 5m
+  resources:
+    - namespaceSelector:
+        matchLabels:
+          capsule.clastix.io/tenant: apps
+      rawItems:
+      - apiVersion: v1
+        kind: ServiceAccount
+        metadata:
+          name: gitops-reconciler
+      - apiVersion: rbac.authorization.k8s.io/v1
+        kind: RoleBinding
+        metadata:
+          name: gitops-reconciler
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: cluster-admin
+        subjects:
+        - kind: ServiceAccount
+          name: gitops-reconciler
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    toolkit.fluxcd.io/tenant: apps
+  name: gitops-reconciler
+  namespace: apps-home
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: gitops-reconciler
+  namespace: apps-home
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: capsule-namespace-provisioner-gitops-apps
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: capsule-namespace-provisioner-gitops
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts:apps
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: apps-gitops-reconciler-impersonator
+rules:
+- apiGroups: [""]
+  resources: ["users"]
+  verbs: ["impersonate"]
+  resourceNames: ["system:serviceaccount:apps-home:gitops-reconciler"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: apps-gitops-reconciler-impersonate
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: apps-gitops-reconciler-impersonator
+subjects:
+- name: gitops-reconciler
+  kind: ServiceAccount
+  namespace: apps-home

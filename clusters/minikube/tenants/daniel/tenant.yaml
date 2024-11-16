@@ -64,17 +64,6 @@ spec:
         - kind: ServiceAccount
           name: gitops-reconciler
 #---
-#apiVersion: capsule.clastix.io/v1beta2
-#kind: CapsuleConfiguration
-#metadata:
-#  name: default
-#spec:
-#  enableTLSReconciler: true
-#  forceTenantPrefix: false
-#  userGroups:
-#  - capsule.clastix.io
-#  - system:serviceaccounts:test-home
-#---
 #apiVersion: rbac.authorization.k8s.io/v1
 #kind: RoleBinding
 #metadata:

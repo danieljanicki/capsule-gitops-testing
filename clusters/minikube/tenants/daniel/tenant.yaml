@@ -115,3 +115,14 @@ subjects:
 - name: gitops-reconciler
   kind: ServiceAccount
   namespace: daniel-home
+---
+apiVersion: capsule.clastix.io/v1beta2
+kind: CapsuleConfiguration
+metadata:
+  name: daniel-home
+spec:
+  enableTLSReconciler: true
+  forceTenantPrefix: false
+  userGroups:
+  - capsule.clastix.io
+  - system:serviceaccounts:daniel-home
